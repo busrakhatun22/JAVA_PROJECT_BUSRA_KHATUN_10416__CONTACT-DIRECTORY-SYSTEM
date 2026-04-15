@@ -48,7 +48,7 @@ class Directory {
 
     // Search Contact
     public void searchContact(String name) {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count;) {
             //if (contacts[i].getName().equalsIgnoreCase(name)) {
                 System.out.println("Contact Found:");
                 contacts[i].display();
@@ -60,10 +60,10 @@ class Directory {
 
     // Delete Contact
     public void deleteContact(String name) {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count;) {
            // if (contacts[i].getName().equalsIgnoreCase(name)) {
 
-                // Shift elements
+                //Shift elements
                 for (int j = i; j < count - 1; j++) {
                     contacts[j] = contacts[j + 1];
                 }
@@ -83,10 +83,10 @@ class Directory {
             return;
         }
 
-        //for (int i = 0; i < count; i++) {
-        //    contacts[i].display();
-        //    System.out.println("---------------");
-        //}
+        for (int i = 0; i < count; i++) {
+            contacts[i].display();
+            System.out.println("---------------");
+        }
     }
 }
 
@@ -116,4 +116,3 @@ public class Main {
         directory.searchContact("Rahul");
     }
 }       
-
