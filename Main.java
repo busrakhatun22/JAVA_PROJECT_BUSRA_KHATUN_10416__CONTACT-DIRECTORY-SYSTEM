@@ -83,10 +83,10 @@ class Directory {
             return;
         }
 
-        for (int i = 0; i < count; i++) {
-            contacts[i].display();
-            System.out.println("---------------");
-        }
+        //for (int i = 0; i < count; i++) {
+        //    contacts[i].display();
+        //    System.out.println("---------------");
+        //}
     }
 }
 
@@ -116,3 +116,4 @@ public class Main {
         directory.searchContact("Rahul");
     }
 }       
+
