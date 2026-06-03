@@ -1,27 +1,27 @@
 // Contact Class
 class Contact {
-     int name;
-     String phone;
+    private String name;
+    private String phoneNumber;
 
     // Constructor
-    public Contact(int name, String phone) {
+    public Contact(String name, String phoneNumber) {
         this.name = name;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
     }
 
     // Getter methods
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     // Display method
     public void display() {
         System.out.println("Name: " + name);
-        System.out.println("Phone: " + phone);
+        System.out.println("Phone: " + phoneNumber);
     }
 }
 
