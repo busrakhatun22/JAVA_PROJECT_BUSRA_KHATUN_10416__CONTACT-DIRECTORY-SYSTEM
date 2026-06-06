@@ -1,15 +1,14 @@
-// Contact Class
+import java.util.Scanner;
+
 class Contact {
     private String name;
     private String phoneNumber;
 
-    // Constructor
     public Contact(String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
 
-    // Getter methods
     public String getName() {
         return name;
     }
@@ -17,102 +16,123 @@ class Contact {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
-    // Display method
-    public void display() {
-        System.out.println("Name: " + name);
-        System.out.println("Phone: " + phoneNumber);
-    }
 }
 
-// Directory Class
 class Directory {
     private Contact[] contacts;
     private int count;
 
-    // Constructor
     public Directory(int size) {
         contacts = new Contact[size];
         count = 0;
     }
 
-    // Add Contact
     public void addContact(String name, String phone) {
         if (count < contacts.length) {
-            //contacts[count++] = new Contact(name, phone);
-            System.out.println("Contact added successfully");
+            contacts[count++] = new Contact(name, phone);
+            System.out.println("Contact added successfully.");
         } else {
-            System.out.println("Directory is full");
+            System.out.println("Directory is full.");
         }
     }
 
-    // Search Contact
     public void searchContact(String name) {
-        for (int i = 0; i < count;) {
-            //if (contacts[i].getName().equalsIgnoreCase(name)) {
-                System.out.println("Contact Found:");
-                contacts[i].display();
+        for (int i = 0; i < count; i++) {
+            if (contacts[i].getName().equalsIgnoreCase(name)) {
+                System.out.println("Name: " + contacts[i].getName());
+                System.out.println("Phone: " + contacts[i].getPhoneNumber());
                 return;
             }
         }
-       // System.out.println("Contact not found");
-    
+        System.out.println("Contact not found.");
+    }
 
-    // Delete Contact
     public void deleteContact(String name) {
-        for (int i = 0; i < count;) {
-           // if (contacts[i].getName().equalsIgnoreCase(name)) {
-
-                //Shift elements
+        for (int i = 0; i < count; i++) {
+            if (contacts[i].getName().equalsIgnoreCase(name)) {
                 for (int j = i; j < count - 1; j++) {
                     contacts[j] = contacts[j + 1];
                 }
-
+                contacts[count - 1] = null;
                 count--;
-                System.out.println("Contact deleted successfully");
+                System.out.println("Contact deleted successfully.");
                 return;
             }
         }
-      //  System.out.println("Contact not found");
-    
+        System.out.println("Contact not found.");
+    }
 
-    // Display All Contacts
-    public void displayAll() {
+    public void displayContacts() {
         if (count == 0) {
-            System.out.println("No contacts available");
+            System.out.println("No contacts available.");
             return;
         }
 
+        System.out.println("\nContact List:");
         for (int i = 0; i < count; i++) {
-            contacts[i].display();
-            System.out.println("---------------");
+            System.out.println("Name: " + contacts[i].getName()
+                    + ", Phone: " + contacts[i].getPhoneNumber());
         }
     }
 }
 
-// Main Class (Testing)
 public class Main {
     public static void main(String[] args) {
-        Directory directory = new Directory(5);
+        Scanner sc = new Scanner(System.in);
 
-        // Adding contacts
-        directory.addContact("Rahul", "9876543210");
-        directory.addContact("Aman", "9123456780");
+        System.out.print("Enter maximum number of contacts: ");
+        int size = sc.nextInt();
+        sc.nextLine();
 
-        // Searching
-        System.out.println("\nSearching for Rahul:");
-        directory.searchContact("rahul");
+        Directory directory = new Directory(size);
 
-        // Display all
-        System.out.println("\nAll Contacts:");
-        directory.displayAll();
+        while (true) {
+            System.out.println("\n--- Contact Directory Menu ---");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Search Contact");
+            System.out.println("3. Delete Contact");
+            System.out.println("4. Display All Contacts");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
 
-        // Deleting
-        System.out.println("\nDeleting Rahul...");
-        directory.deleteContact("Rahul");
+            int choice = sc.nextInt();
+            sc.nextLine();
 
-        // Searching again
-        System.out.println("\nSearching again:");
-        directory.searchContact("Rahul");
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+
+                    System.out.print("Enter Phone Number: ");
+                    String phone = sc.nextLine();
+
+                    directory.addContact(name, phone);
+                    break;
+
+                case 2:
+                    System.out.print("Enter Name to Search: ");
+                    name = sc.nextLine();
+                    directory.searchContact(name);
+                    break;
+
+                case 3:
+                    System.out.print("Enter Name to Delete: ");
+                    name = sc.nextLine();
+                    directory.deleteContact(name);
+                    break;
+
+                case 4:
+                    directory.displayContacts();
+                    break;
+
+                case 5:
+                    System.out.println("Exiting Program...");
+                    sc.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+        }
     }
-}       
+}
